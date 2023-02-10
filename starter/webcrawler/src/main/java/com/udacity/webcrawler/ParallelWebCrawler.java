@@ -67,8 +67,6 @@ final class ParallelWebCrawler implements WebCrawler {
               .setUrlsVisited(visitedUrls.size())
               .build();
     }
-    System.out.println("counts "+counts);
-    System.out.println("popularWordCount "+popularWordCount);
     return new CrawlResult.Builder().
             setUrlsVisited(visitedUrls.size()).
             setWordCounts(WordCounts.sort(counts, popularWordCount)).
@@ -106,10 +104,10 @@ final class ParallelWebCrawler implements WebCrawler {
     }
     @Override
     protected void compute() {
-      if(processTask()){
+      if(processTask() || !visitedUrls.add(url)){
         return;
       }
-      visitedUrls.add(url);
+
       PageParser.Result result = parserFactory.get(url).parse();
       for(Map.Entry<String, Integer> entry: result.getWordCounts().entrySet()){
         counts.put(entry.getKey(),

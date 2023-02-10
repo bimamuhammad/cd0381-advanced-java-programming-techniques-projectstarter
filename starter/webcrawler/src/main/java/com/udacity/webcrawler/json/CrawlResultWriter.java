@@ -7,8 +7,10 @@ import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Objects;
 
 /**
@@ -36,7 +38,9 @@ public final class CrawlResultWriter {
     // This is here to get rid of the unused variable warning.
     Objects.requireNonNull(path);
     // TODO: Fill in this method.
-    try(Writer writer = Files.newBufferedWriter(path);) {
+    try(Writer writer = Files.newBufferedWriter(
+            path, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+    ) {
       this.write(writer);
     }catch(IOException ioException){
       System.out.println("Could not write to the file");
