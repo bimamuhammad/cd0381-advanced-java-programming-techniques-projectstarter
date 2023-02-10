@@ -61,11 +61,6 @@ final class ParallelWebCrawler implements WebCrawler {
       pool.invoke(task);
     }
     pool.shutdown();
-    try {
-      pool.awaitTermination(10, TimeUnit.SECONDS);
-    }catch (InterruptedException interruptedException){
-
-    }
     if(counts.isEmpty()){
       return new CrawlResult.Builder()
               .setWordCounts(counts)

@@ -55,7 +55,7 @@ public final class CrawlResultWriter {
     ObjectMapper objectMapper = new ObjectMapper();
     objectMapper.disable(JsonGenerator.Feature.AUTO_CLOSE_TARGET);
     try {
-      objectMapper.writer().with(SerializationFeature.INDENT_OUTPUT).writeValue(writer, result);
+      objectMapper.writeValue(writer, result);
     }catch (IOException ioException){
       System.out.println("Could not write to the file");
     }
