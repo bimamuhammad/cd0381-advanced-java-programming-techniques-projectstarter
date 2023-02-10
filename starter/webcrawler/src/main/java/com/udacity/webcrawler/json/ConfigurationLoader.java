@@ -56,7 +56,7 @@ public final class ConfigurationLoader {
     try {
       crawlerConfig = objectMapper.readValue(reader, CrawlerConfiguration.class);
     } catch(IOException ioException){
-      System.out.println("File could nto be accessed");
+      System.out.println("File could not be accessed");
     }
     return crawlerConfig;
   }
