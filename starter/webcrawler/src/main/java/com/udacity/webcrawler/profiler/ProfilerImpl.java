@@ -7,7 +7,10 @@ import java.io.Writer;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.Clock;
 import java.time.ZonedDateTime;
 import java.util.Objects;
@@ -60,8 +63,9 @@ final class ProfilerImpl implements Profiler {
   public void writeData(Path path) {
     // TODO: Write the ProfilingState data to the given file path. If a file already exists at that
     //       path, the new data should be appended to the existing file.
-    try {
-      Writer writer = new FileWriter(path.toFile(), true);
+//    Files.newBufferedWriter(
+//            path, StandardCharsets.UTF_8, StandardOpenOption.CREATE);
+    try(Writer writer = new FileWriter(path.toFile(), true);) {
       writeData(writer);
     }catch (IOException ioException){
       System.out.println("There was an error working on this file");
